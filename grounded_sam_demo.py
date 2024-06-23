@@ -139,29 +139,29 @@ def save_mask_data(output_dir, mask_list, box_list, label_list):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser("Grounded-Segment-Anything Demo", add_help=True)
-    parser.add_argument("--config", type=str, required=True, help="path to config file")
+    parser.add_argument("--config", type=str, default="GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py", required=False, help="path to config file")
     parser.add_argument(
-        "--grounded_checkpoint", type=str, required=True, help="path to checkpoint file"
+        "--grounded_checkpoint", type=str, default="./groundingdino_swint_ogc.pth", required=False, help="path to checkpoint file"
     )
     parser.add_argument(
         "--sam_version", type=str, default="vit_h", required=False, help="SAM ViT version: vit_b / vit_l / vit_h"
     )
     parser.add_argument(
-        "--sam_checkpoint", type=str, required=False, help="path to sam checkpoint file"
+        "--sam_checkpoint", type=str,default="./sam_vit_b_01ec64.pth", required=False, help="path to sam checkpoint file"
     )
     parser.add_argument(
-        "--sam_hq_checkpoint", type=str, default=None, help="path to sam-hq checkpoint file"
+        "--sam_hq_checkpoint", type=str, default='./sam_hq_vit_b.pth', help="path to sam-hq checkpoint file"
     )
     parser.add_argument(
-        "--use_sam_hq", action="store_true", help="using sam-hq for prediction"
+        "--use_sam_hq", default='True', action="store_true", help="using sam-hq for prediction"
     )
-    parser.add_argument("--input_image", type=str, required=True, help="path to image file")
-    parser.add_argument("--text_prompt", type=str, required=True, help="text prompt")
+    parser.add_argument("--input_image", type=str, default="./input_image/crop_corn_w7_45_011721.jpg", required=False, help="path to image file")
+    parser.add_argument("--text_prompt", type=str, default="weed",required=False, help="text prompt")
     parser.add_argument(
-        "--output_dir", "-o", type=str, default="outputs", required=True, help="output directory"
+        "--output_dir", "-o", type=str, default="/hy-tmp/Grounded-Segment-Anything/output_image", required=False, help="output directory"
     )
 
-    parser.add_argument("--box_threshold", type=float, default=0.3, help="box threshold")
+    parser.add_argument("--box_threshold", type=float, default=0.7, help="box threshold")
     parser.add_argument("--text_threshold", type=float, default=0.25, help="text threshold")
 
     parser.add_argument("--device", type=str, default="cpu", help="running on cpu only!, default=False")
